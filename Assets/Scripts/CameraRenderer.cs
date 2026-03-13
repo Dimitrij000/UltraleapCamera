@@ -17,7 +17,6 @@ public class CameraRenderer : MonoBehaviour
         {
             // Создаём поток с камеры по умолчанию
             webcam = new WebCamTexture(devices[0].name);
-            webcam.filterMode = FilterMode.Bilinear;
 
             // Запускаем камеру
             webcam.Play();
