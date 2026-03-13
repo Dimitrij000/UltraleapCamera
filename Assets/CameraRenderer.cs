@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
-using UnityEngine.Windows.WebCam;
 
 public class CameraRenderer : MonoBehaviour
 {
+    public Material camNotFoundMaterial;
+
     private WebCamTexture webcam;
     private Renderer planeRenderer;
 
@@ -12,11 +13,6 @@ public class CameraRenderer : MonoBehaviour
         planeRenderer = GetComponent<Renderer>();
 
         WebCamDevice[] devices = WebCamTexture.devices;
-        foreach (var device in devices)
-        {
-            Debug.Log("Webcam found: " + device.name);
-        }
-
         if (devices.Length > 0)
         {
             // Создаём поток с камеры по умолчанию
@@ -28,6 +24,10 @@ public class CameraRenderer : MonoBehaviour
 
             // Назначаем поток как текстуру на материал плоскости
             planeRenderer.material.mainTexture = webcam;
+        }
+        else
+        {
+            planeRenderer.material = camNotFoundMaterial;
         }
     }
 
